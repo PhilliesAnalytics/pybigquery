@@ -181,6 +181,9 @@ class BigQueryCompiler(SQLCompiler):
 
 class BigQueryTypeCompiler(GenericTypeCompiler):
 
+    def visit_MEDIUMINT(self, type_, **kw):
+        return 'INT64'
+
     def visit_integer(self, type_, **kw):
         return 'INT64'
 
