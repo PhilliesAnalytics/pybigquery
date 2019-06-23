@@ -217,10 +217,8 @@ class BigQueryDDLCompiler(DDLCompiler):
         return None
 
     def get_column_specification(self, column, **kwargs):
-        print vars(self)
-        print column
-        print kwargs
         colspec = super(BigQueryDDLCompiler, self).get_column_specification(column, **kwargs)
+        print colspec
         if column.doc is not None:
             colspec = '{} OPTIONS(description={})'.format(colspec, self.preparer.quote(column.doc))
         return colspec
