@@ -181,11 +181,35 @@ class BigQueryCompiler(SQLCompiler):
 
 class BigQueryTypeCompiler(GenericTypeCompiler):
 
+    def visit_BIGINT(self, type_, **kw):
+        return 'INT64'
+
+    def visit_INT(self, type_, **kw):
+        return 'INT64'
+
     def visit_MEDIUMINT(self, type_, **kw):
+        return 'INT64'
+
+    def visit_SMALLINT(self, type_, **kw):
         return 'INT64'
 
     def visit_TINYINT(self, type_, **kw):
         return 'INT64'
+
+    def visit_NUMERIC(self, type_, **kw):
+        return 'NUMERIC'
+
+    def visit_DECIMAL(self, type_, **kw):
+        return 'NUMERIC'
+
+    def visit_FLOAT(self, type_, **kw):
+        return 'FLOAT64'
+
+    def visit_DOUBLE(self, type_, **kw):
+        return 'FLOAT64'
+
+    def visit_TEXT(self, type_, **kw):
+        return 'STRING'
 
     def visit_VARCHAR(self, type_, **kw):
         return 'STRING'
@@ -193,26 +217,14 @@ class BigQueryTypeCompiler(GenericTypeCompiler):
     def visit_CHAR(self, type_, **kw):
         return 'STRING'
 
-    def visit_NUMERIC(self, type_, **kw):
-        return 'NUMERIC'
-
-    def visit_integer(self, type_, **kw):
-        return 'INT64'
-
-    def visit_float(self, type_, **kw):
-        return 'FLOAT64'
-
-    def visit_text(self, type_, **kw):
+    def visit_ENUM(self, type_, **kw):
         return 'STRING'
 
-    def visit_string(self, type_, **kw):
-        return 'STRING'
+    def visit_BIT(self, type_, **kw):
+        return 'BOOL'
 
     def visit_BINARY(self, type_, **kw):
         return 'BYTES'
-
-    def visit_DECIMAL(self, type_, **kw):
-        return 'NUMERIC'
 
 
 class BigQueryDDLCompiler(DDLCompiler):
