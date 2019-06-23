@@ -190,6 +190,12 @@ class BigQueryTypeCompiler(GenericTypeCompiler):
     def visit_VARCHAR(self, type_, **kw):
         return 'STRING'
 
+    def visit_CHAR(self, type_, **kw):
+        return 'STRING'
+
+    def visit_NUMERIC(self, type_, **kw):
+        return 'NUMERIC'
+
     def visit_integer(self, type_, **kw):
         return 'INT64'
 
