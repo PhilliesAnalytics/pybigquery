@@ -187,6 +187,9 @@ class BigQueryTypeCompiler(GenericTypeCompiler):
     def visit_TINYINT(self, type_, **kw):
         return 'INT64'
 
+    def visit_VARCHAR(self, type_, **kw):
+        return 'STRING'
+
     def visit_integer(self, type_, **kw):
         return 'INT64'
 
