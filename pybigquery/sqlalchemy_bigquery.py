@@ -489,7 +489,7 @@ class BigQueryDialect(DefaultDialect):
             if val is None:
                 params[key] = "NULL"
             elif isinstance(val, datetime):
-                params[key] = "'" + datetime.strftime(val, "%Y-%m-%dT%H:%M:%S.00Z") + "'"
+                params[key] = "'" + datetime.strftime(val, "%Y-%m-%d %H:%M:%S") + "'"
             elif isinstance(val, unicode):
                 params[key] = "'" + val + "'"
             else:
