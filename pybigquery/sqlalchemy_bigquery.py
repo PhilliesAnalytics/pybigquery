@@ -226,6 +226,9 @@ class BigQueryTypeCompiler(GenericTypeCompiler):
     def visit_BINARY(self, type_, **kw):
         return 'BYTES'
 
+    def visit_DATETIME(self, type_, **kw):
+        return 'DATETIME'
+
 
 class BigQueryDDLCompiler(DDLCompiler):
 
