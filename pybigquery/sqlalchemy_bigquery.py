@@ -484,11 +484,12 @@ class BigQueryDialect(DefaultDialect):
         super(DefaultDialect, self).do_commit(dbapi_connection)
 
     def do_execute(self, cursor, statement, parameters, context=None):
-        print self
-        print cursor
+        print vars(self)
+        print vars(cursor)
         print statement
+        print type(statement)
         print parameters
-        print context
+        print vars(context)
         super(DefaultDialect, self).do_execute(cursor, statement, parameters, context=None)
 
     def do_rollback(self, dbapi_connection):
