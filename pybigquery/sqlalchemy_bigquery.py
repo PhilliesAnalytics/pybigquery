@@ -479,17 +479,8 @@ class BigQueryDialect(DefaultDialect):
                 result.append(table_name)
         return result
 
-    def do_commit(dbapi_connection):
-        print vars(dbapi_connection)
-        super(DefaultDialect, self).do_commit(dbapi_connection)
-
     def do_execute(self, cursor, statement, parameters, context=None):
-        print vars(self)
-        print vars(cursor)
-        print statement
-        print type(statement)
-        print parameters
-        print vars(context)
+        parameters = {key: val if val is not None else "NULL" for key, val in parameters.iteritems()}
         super(DefaultDialect, self).do_execute(cursor, statement, parameters, context=None)
 
     def do_rollback(self, dbapi_connection):
