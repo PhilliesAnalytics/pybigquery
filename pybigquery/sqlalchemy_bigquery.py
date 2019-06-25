@@ -479,6 +479,10 @@ class BigQueryDialect(DefaultDialect):
                 result.append(table_name)
         return result
 
+    def do_commit(dbapi_connection):
+        print vars(dbapi_connection)
+        super(DefaultDialect, self).do_commit(dbapi_connection)
+
     def do_rollback(self, dbapi_connection):
         # BigQuery has no support for transactions.
         pass
