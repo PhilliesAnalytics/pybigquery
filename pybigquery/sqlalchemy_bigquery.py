@@ -492,7 +492,8 @@ class BigQueryDialect(DefaultDialect):
                 params[key] = datetime.strftime(val, "%Y-%m-%dT%H:%M:%S.00Z")
             else:
                 params[key] = val
-        cursor.execute(statement, params)
+        print statement % params
+        cursor.execute(statement % params)
 
     def do_rollback(self, dbapi_connection):
         # BigQuery has no support for transactions.
