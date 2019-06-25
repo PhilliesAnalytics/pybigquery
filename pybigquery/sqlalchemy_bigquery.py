@@ -483,7 +483,7 @@ class BigQueryDialect(DefaultDialect):
                 result.append(table_name)
         return result
 
-    def do_execute(self, cursor, statement, parameters, context=None):
+    def _fmt_params(self, parameters):
         params = {}
         for key, val in parameters.iteritems():
             if (not val and val != 0) or val == "None" or val is None:
@@ -493,10 +493,17 @@ class BigQueryDialect(DefaultDialect):
             elif isinstance(val, unicode):
                 params[key] = "'" + val + "'"
             else:
-                print type(val)
                 params[key] = val
         print params
+        return params
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+        params = self._fmt_params(parameters)
         cursor.execute(statement % params)
+
+    def do_executemany(self, cursor, statement, parameters, context=None):
+        params = [self._fmt_params(x) for x in parameters]
+        cursor.executemany(statement % params)
 
     def do_rollback(self, dbapi_connection):
         # BigQuery has no support for transactions.
