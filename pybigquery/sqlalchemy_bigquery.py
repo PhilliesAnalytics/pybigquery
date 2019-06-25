@@ -481,7 +481,7 @@ class BigQueryDialect(DefaultDialect):
 
     def do_execute(self, cursor, statement, parameters, context=None):
         parameters = {key: val if val is not None else "NULL" for key, val in parameters.iteritems()}
-        super(DefaultDialect, self).do_execute(cursor, statement, parameters, context=None)
+        super(BigQueryDialect, self).do_execute(cursor, statement, parameters, context=None)
 
     def do_rollback(self, dbapi_connection):
         # BigQuery has no support for transactions.
