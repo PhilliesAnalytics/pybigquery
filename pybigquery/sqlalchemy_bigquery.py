@@ -486,13 +486,14 @@ class BigQueryDialect(DefaultDialect):
     def do_execute(self, cursor, statement, parameters, context=None):
         params = {}
         for key, val in parameters.iteritems():
-            if not val and val != 0:
+            if (not val and val != 0) or val == "None" or val is None:
                 params[key] = "NULL"
             elif isinstance(val, datetime):
                 params[key] = "'" + datetime.strftime(val, "%Y-%m-%d %H:%M:%S") + "'"
             elif isinstance(val, unicode):
                 params[key] = "'" + val + "'"
             else:
+                print type(val)
                 params[key] = val
         cursor.execute(statement % params)
 
