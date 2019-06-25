@@ -483,12 +483,13 @@ class BigQueryDialect(DefaultDialect):
         print vars(dbapi_connection)
         super(DefaultDialect, self).do_commit(dbapi_connection)
 
-    def do_execute(cursor, statement, parameters, context=None):
+    def do_execute(self, cursor, statement, parameters, context=None):
+        print self
         print cursor
         print statement
         print parameters
         print context
-        DefaultDialect.do_execute(cursor, statement, parameters, context=None)
+        super(DefaultDialect, self).do_execute(cursor, statement, parameters, context=None)
 
     def do_rollback(self, dbapi_connection):
         # BigQuery has no support for transactions.
