@@ -493,9 +493,7 @@ class BigQueryDialect(DefaultDialect):
             elif isinstance(val, unicode):
                 params[key] = "'" + val + "'"
             else:
-                print type(val)
                 params[key] = val
-        print statement % params
         cursor.execute(statement % params)
 
     def do_rollback(self, dbapi_connection):
