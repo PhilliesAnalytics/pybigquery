@@ -495,6 +495,7 @@ class BigQueryDialect(DefaultDialect):
             else:
                 print type(val)
                 params[key] = val
+        print params
         cursor.execute(statement % params)
 
     def do_rollback(self, dbapi_connection):
