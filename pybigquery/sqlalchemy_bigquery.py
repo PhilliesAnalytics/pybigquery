@@ -503,7 +503,7 @@ class BigQueryDialect(DefaultDialect):
 
     def do_executemany(self, cursor, statement, parameters, context=None):
         for parameter in parameters:
-            params = self._fmt_params({key: val for key, val in parameters})
+            params = self._fmt_params(parameter)
             cursor.execute(statement % params)
 
     def do_rollback(self, dbapi_connection):
