@@ -502,9 +502,12 @@ class BigQueryDialect(DefaultDialect):
         cursor.execute(statement % params)
 
     def do_executemany(self, cursor, statement, parameters, context=None):
+        all_params = ""
         for parameter in parameters:
             params = self._fmt_params(parameter)
-            cursor.execute(statement % params)
+            all_params += "(" + params + "), "
+        all_params = all_params[:-1]
+        cursor.execute(statement % all_params)
 
     def do_rollback(self, dbapi_connection):
         # BigQuery has no support for transactions.
