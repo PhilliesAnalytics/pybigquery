@@ -486,9 +486,9 @@ class BigQueryDialect(DefaultDialect):
     def do_execute(self, cursor, statement, parameters, context=None):
         params = {}
         for key, val in parameters.iteritems():
-            if key is None:
+            if val is None:
                 params[key] = "NULL"
-            elif isinstance(key, datetime):
+            elif isinstance(val, datetime):
                 params[key] = str(val)
             else:
                 params[key] = val
